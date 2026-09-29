@@ -1,0 +1,127 @@
+% Bài Blog: Nghịch lý Protagoras.
+% Chỉ dùng tập con LaTeX được hỗ trợ, xem docs/latex-blog-authoring.md.
+
+\section*{Mở đầu}
+
+Một luật sư già nhận một chàng trai trẻ làm học trò, với một hợp đồng học phí nghe rất rõ ràng. Rồi vụ kiện đầu tiên lại chính là vụ kiện giữa hai người.
+
+Tình huống này được gọi là \tm{nghịch lý Protagoras} hay \tm{nghịch lý học phí một nửa}, tiếng Anh là \eng{The Protagoras Paradox} hoặc \eng{The Paradox of the Court}. Nó nổi tiếng trong lịch sử logic và lập luận pháp lý vì cả hai bên đều có một lập luận nghe rất chặt chẽ. Bài này kể lại câu chuyện, đặt hai lập luận cạnh nhau, rồi hỏi mâu thuẫn thật sự nằm ở đâu.
+
+\begin{vd}{Nghịch lý Protagoras (The Protagoras Paradox)}
+
+\section*{Thỏa thuận nửa học phí}
+
+Một người thầy dạy luật nhận một học trò theo một thỏa thuận đặc biệt. Học phí được chia làm hai phần. Người học trò trả nửa đầu khi nhập học. Nửa còn lại chỉ phải thanh toán sau khi tốt nghiệp và thắng vụ kiện đầu tiên.
+
+Học xong, chàng trai không hành nghề luật. Anh chuyển sang chạy Grab và không tham gia vụ kiện nào. Vì điều kiện “thắng vụ kiện đầu tiên” chưa xảy ra, anh cho rằng chưa phát sinh nghĩa vụ thanh toán phần học phí còn lại. Người thầy không đồng ý, và quyết định kiện để đòi khoản tiền đó.
+
+\section*{Lập luận của người thầy}
+
+Người thầy lập luận như sau:
+
+\begin{itemize}
+    \item Nếu người học trò thắng vụ kiện, đó chính là vụ kiện đầu tiên mà anh thắng. Theo hợp đồng, anh phải trả phần học phí còn lại.
+    \item Nếu người học trò thua, tòa án có thể ra phán quyết buộc anh thanh toán.
+\end{itemize}
+
+Vì vậy, theo người thầy, dù kết quả nào xảy ra thì người học trò cũng phải trả.
+
+\section*{Lập luận của người học trò}
+
+Người học trò phản bác:
+
+\begin{itemize}
+    \item Nếu người học trò thắng, tòa bác yêu cầu của người thầy. Theo phán quyết của tòa, anh không phải trả trong vụ kiện này.
+    \item Nếu người học trò thua, anh vẫn chưa thắng vụ kiện đầu tiên. Theo điều kiện của hợp đồng, nghĩa vụ thanh toán chưa phát sinh.
+\end{itemize}
+
+Vì vậy, theo người học trò, dù kết quả nào xảy ra thì anh cũng chưa phải trả.
+
+\end{vd}
+
+\section*{Mô hình hóa bằng logic}
+
+Cả hai lập luận cùng giả định rằng vụ kiện hiện tại chính là vụ kiện đầu tiên của người học trò, và kết quả của nó chỉ có hai khả năng: thắng hoặc thua. Để so sánh hai lập luận một cách chính xác, ta đặt các ký hiệu sau:
+
+\begin{itemize}
+    \item $T$: người học trò có nghĩa vụ thanh toán nửa học phí còn lại;
+    \item $W$: người học trò thắng vụ kiện hiện tại;
+    \item $L$: người học trò thua vụ kiện hiện tại, với giả định nhị phân $L \plpl \neg W$;
+    \item $C$: các hệ quả được suy ra từ hợp đồng;
+    \item $V$: các hệ quả được suy ra từ phán quyết của tòa trong vụ kiện hiện tại.
+\end{itemize}
+
+Lập luận của người thầy kết hợp hai nguồn quy tắc:
+
+\[
+C \models W \pl T,
+\qquad
+V \models L \pl T.
+\]
+
+Với giả định $W \vee L$, người thầy suy ra:
+
+\[
+\mnt{W \vee L} \pl T.
+\]
+
+Ngược lại, lập luận của người học trò cũng kết hợp hai nguồn quy tắc:
+
+\[
+V \models W \pl \neg T,
+\qquad
+C \models L \pl \neg T.
+\]
+
+Với cùng giả định $W \vee L$, người học trò suy ra:
+
+\[
+\mnt{W \vee L} \pl \neg T.
+\]
+
+\section*{Mâu thuẫn thật hay chỉ là trộn lẫn quy tắc?}
+
+Hai kết luận trên trái ngược nhau, nhưng điều đó chưa chứng minh rằng một hệ tiên đề duy nhất suy ra được cả $T$ lẫn $\neg T$. Mỗi bên chỉ chọn hai trong bốn quy tắc, và mỗi nguồn (hợp đồng, phán quyết) được dùng một lần. Người thầy lấy quy tắc “thắng thì phải trả” từ hợp đồng và quy tắc “thua thì bị buộc trả” từ phán quyết. Người học trò lấy quy tắc “thắng thì không phải trả” từ phán quyết và quy tắc “thua thì chưa phát sinh nghĩa vụ” từ hợp đồng.
+
+Nếu buộc cả bốn quy tắc cùng có hiệu lực đối với cùng một mệnh đề $T$ tại cùng một thời điểm, ta được:
+
+\[
+\mnt{W \pl T} \wedge \mnt{W \pl \neg T} \models \neg W,
+\qquad
+\mnt{L \pl T} \wedge \mnt{L \pl \neg T} \models \neg L.
+\]
+
+Vì $L \plpl \neg W$, hai kết luận $\neg W$ và $\neg L$ không thể cùng đúng. Điều này cho thấy không thể giữ cả bốn quy tắc trong một hệ với cùng một $T$ và cùng một thời điểm. Đó là nhận xét về bộ giả thiết, không phải bằng chứng rằng $T$ vừa đúng vừa sai. Điểm cần làm rõ là quy tắc nào có hiệu lực, hiệu lực ở thời điểm nào, và phán quyết trong vụ kiện hiện tại tác động thế nào đến điều kiện của hợp đồng.
+
+\section*{Tách hai thời điểm}
+
+Một cách phân tích là tách hai thời điểm:
+
+\begin{itemize}
+    \item Trước khi vụ kiện đầu tiên kết thúc, điều kiện “đã thắng vụ kiện đầu tiên” có thể chưa được thỏa mãn.
+    \item Sau khi vụ kiện kết thúc, nếu người học trò thắng, kết quả đó có thể kích hoạt điều khoản thanh toán cho một thời điểm tiếp theo.
+\end{itemize}
+
+Theo cách đọc này, phán quyết về yêu cầu hiện tại và nghĩa vụ hợp đồng phát sinh sau phán quyết không nhất thiết là cùng một mệnh đề tại cùng một thời điểm. Ta thêm chỉ số thời gian: $T_0$ là nghĩa vụ thanh toán tại thời điểm xét xử, còn $T_1$ là nghĩa vụ thanh toán phát sinh sau khi vụ kiện kết thúc. Khi đó:
+
+\[
+V \models W \pl \neg T_0,
+\qquad
+C \models W \pl T_1.
+\]
+
+Hai kết quả này không đối chọi nhau, vì $\neg T_0$ và $T_1$ có thể cùng đúng. Vẻ mâu thuẫn biến mất khi ta nêu rõ mình đang nói về thời điểm nào.
+
+Do đó, nghịch lý không nhất thiết biểu thị một mâu thuẫn không thể giải quyết của logic cổ điển. Nó cho thấy sự nguy hiểm của việc trộn lẫn các hệ quy tắc, các cấp hiệu lực và các thời điểm đánh giá mà không nêu rõ quan hệ giữa chúng.
+
+\section*{Một cách phân giải thường được đề xuất}
+
+Một cách giải quyết thường được đề xuất là bác yêu cầu thanh toán ở vụ kiện đầu tiên, vì điều kiện hợp đồng chưa phát sinh tại thời điểm khởi kiện. Nếu người học trò thắng vụ kiện đó, chiến thắng ấy có thể làm điều kiện hợp đồng phát sinh sau phiên tòa.
+
+Đây chỉ là một cách phân giải để thảo luận, không phải kết luận pháp lý. Kết quả thực tế còn phụ thuộc vào nội dung hợp đồng, thẩm quyền của tòa và pháp luật áp dụng.
+
+\section*{Vậy ai đúng?}
+
+Nhìn riêng từng lập luận, bên nào cũng có vẻ đúng, vì mỗi bên dùng một cách chọn quy tắc và một cách hiểu về thời điểm khác nhau. Trước khi hỏi ai đúng, có lẽ cần hỏi: quy tắc nào đang có hiệu lực, và vào lúc nào?
+
+Vậy trong vụ kiện đầu tiên, ai đúng?

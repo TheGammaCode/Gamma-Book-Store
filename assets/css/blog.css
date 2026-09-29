@@ -6,9 +6,15 @@
   --rule: #d8d0bc;
   --accent: #8a6d1f;
   --accent-quiet: #cfc6a8;
+  /* Môi trường Ví dụ (vd) của sách: GammaOchre / GammaOchreTint.
+     Repository không chứa giá trị CMYK của preamble, nên hai màu này được lấy gần đúng từ
+     màu nhấn của trang (#8a6d1f). Chữ trắng trên #8a6d1f đạt tỷ lệ tương phản khoảng 4.9:1. */
+  --ochre: #8a6d1f;
+  --ochre-tint: #f6f0df;
 }
 @media (prefers-color-scheme: dark) {
   :root {
+    --ochre-tint: #211d10;
     --ink: #ece7da; --ink-soft: #b0aa97; --paper: #14130d;
     --paper-panel: #1c1a12; --rule: #34301f; --accent: #d4b04a; --accent-quiet: #47401f;
   }
@@ -67,12 +73,31 @@ h1 { font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.05; margin: 0 0 1rem;
 .post-head h1 { font-size: clamp(1.9rem, 6vw, 2.9rem); line-height: 1.12; }
 .post-figure { margin: 0 0 2.5rem; }
 .post-figure figcaption { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.6rem; }
-.post-intro { font-size: 1.15rem; color: var(--ink-soft); }
+.post-subtitle { font-style: italic; color: var(--ink-soft); margin: 0; font-size: 1.05rem; }
+.english-term { font-style: italic; }
 .post-body h2 { font-size: 1.4rem; margin: 2.4rem 0 0.9rem; font-weight: 600; }
-.post-body .verdict h2 {
-  font-size: clamp(1.8rem, 5vw, 2.3rem); margin: 3rem 0 1rem; padding-top: 1.6rem;
-  border-top: 1px solid var(--rule); color: var(--accent);
+.post-body ul { margin: 0 0 1.1rem; padding-left: 1.4rem; max-width: 62ch; }
+.post-body li { margin-bottom: 0.5rem; }
+.references { margin-top: 2.5rem; }
+.references h2 { font-size: 1.4rem; margin: 0 0 0.9rem; font-weight: 600; }
+.references ol { padding-left: 1.4rem; margin: 0; }
+
+/* công thức: display math cuộn ngang trong vùng công thức, không làm tràn trang */
+.math-display { margin: 1.2rem 0; }
+mjx-container[display="true"] { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; margin: 1rem 0 !important; }
+
+/* môi trường Ví dụ */
+.gamma-example { border: 2px solid var(--ochre); border-radius: 6px; background: var(--ochre-tint); margin: 2.4rem 0; overflow: hidden; }
+.gamma-example__header { background: var(--ochre); padding: 0.65rem 1.4rem; }
+.gamma-example__title { margin: 0; color: #fff; font-style: italic; font-weight: 600; font-size: 1.05rem; line-height: 1.4; }
+.gamma-example__body { padding: 0 1.4rem 1.2rem; }
+.gamma-example__body section:first-child > h2 { margin-top: 1.4rem; }
+.gamma-example__body p:last-child { margin-bottom: 0; }
+@media (max-width: 480px) {
+  .gamma-example__header { padding: 0.6rem 1rem; }
+  .gamma-example__body { padding: 0 1rem 1rem; }
 }
+
 .note {
   background: var(--paper-panel); border: 1px solid var(--rule); border-radius: 10px;
   padding: 1.1rem 1.4rem; margin: 2.5rem 0 0;

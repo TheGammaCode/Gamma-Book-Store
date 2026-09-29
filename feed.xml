@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Gamma Blog</title>
+    <link>https://gammabook.store/blog/</link>
+    <description>Những câu chuyện về lý thuyết tập hợp, logic, nghịch lý và vô hạn.</description>
+    <language>vi-VN</language>
+    <lastBuildDate>Tue, 29 Sep 2026 09:00:00 +0700</lastBuildDate>
+    <atom:link href="https://gammabook.store/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Nghịch lý luật sư và người học trò: Vậy ai đúng?</title>
+      <link>https://gammabook.store/blog/nghich-ly-luat-su-va-nguoi-hoc-tro/</link>
+      <guid isPermaLink="true">https://gammabook.store/blog/nghich-ly-luat-su-va-nguoi-hoc-tro/</guid>
+      <description>Một luật sư già kiện học trò cũ để đòi nửa học phí còn lại, và cả hai bên đều có lập luận nghe rất thuyết phục. Vậy ai đúng?</description>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0700</pubDate>
+    </item>
+  </channel>
+</rss>

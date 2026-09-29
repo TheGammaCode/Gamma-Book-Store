@@ -1,0 +1,88 @@
+:root {
+  --ink: #1a1a17;
+  --ink-soft: #565248;
+  --paper: #faf7f0;
+  --paper-panel: #f1ecdf;
+  --rule: #d8d0bc;
+  --accent: #8a6d1f;
+  --accent-quiet: #cfc6a8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #ece7da; --ink-soft: #b0aa97; --paper: #14130d;
+    --paper-panel: #1c1a12; --rule: #34301f; --accent: #d4b04a; --accent-quiet: #47401f;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Noto Serif", serif;
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.sans, .site-header, .site-footer, .meta, .btn, .kicker { font-family: "Helvetica Neue", Arial, sans-serif; }
+.inner { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
+a { color: var(--accent); }
+a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+img { display: block; max-width: 100%; height: auto; }
+p { margin: 0 0 1.1rem; max-width: 62ch; }
+
+/* header */
+.site-header { border-bottom: 1px solid var(--rule); padding: 1rem 0; }
+.site-header .inner { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1.5rem; }
+.brand { color: var(--ink); text-decoration: none; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.02em; }
+.site-header nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.2rem; font-size: 0.9rem; }
+.site-header nav a { color: var(--ink-soft); text-decoration: none; }
+.site-header nav a:hover, .site-header nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+/* blog index */
+.blog-hero { padding: 3.5rem 0 2rem; }
+.kicker { font-size: 0.78rem; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 1rem; }
+h1 { font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.05; margin: 0 0 1rem; font-weight: 600; letter-spacing: -0.01em; }
+.lede { font-size: 1.12rem; color: var(--ink-soft); margin: 0 0 1.2rem; }
+.back-link { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.9rem; }
+
+.post-list { padding: 1rem 0 4rem; }
+.post-card { border-top: 1px solid var(--rule); padding-top: 2rem; }
+.post-card figure { margin: 0 0 1.4rem; }
+.post-card img, .post-figure img { width: 100%; border-radius: 4px; border: 1px solid var(--rule); background: var(--paper-panel); }
+.post-card h2 { font-size: 1.55rem; line-height: 1.25; margin: 0 0 0.6rem; font-weight: 600; }
+.post-card h2 a { color: var(--ink); text-decoration: none; }
+.post-card h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.meta { font-size: 0.85rem; color: var(--ink-soft); margin: 0 0 0.9rem; }
+.btn {
+  display: inline-block; padding: 0.75rem 1.4rem; border: 1px solid var(--ink); border-radius: 3px;
+  color: var(--ink); text-decoration: none; font-size: 0.95rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn:hover { background: var(--ink); color: var(--paper); }
+
+/* article */
+.post-head { padding: 3.5rem 0 1.5rem; }
+.post-head h1 { font-size: clamp(1.9rem, 6vw, 2.9rem); line-height: 1.12; }
+.post-figure { margin: 0 0 2.5rem; }
+.post-figure figcaption { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.6rem; }
+.post-intro { font-size: 1.15rem; color: var(--ink-soft); }
+.post-body h2 { font-size: 1.4rem; margin: 2.4rem 0 0.9rem; font-weight: 600; }
+.post-body .verdict h2 {
+  font-size: clamp(1.8rem, 5vw, 2.3rem); margin: 3rem 0 1rem; padding-top: 1.6rem;
+  border-top: 1px solid var(--rule); color: var(--accent);
+}
+.note {
+  background: var(--paper-panel); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 1.1rem 1.4rem; margin: 2.5rem 0 0;
+  font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.88rem; color: var(--ink-soft);
+}
+.note p { margin: 0; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 2.5rem 0 4rem; }
+
+/* footer */
+.site-footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); font-size: 0.78rem; color: var(--ink-soft); }
+.site-footer .inner { display: flex; flex-direction: column; gap: 0.5rem; }
+.site-footer a { color: var(--ink-soft); }
+.site-footer .legal { line-height: 1.6; }

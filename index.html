@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"9747b99897eb037092e02bbf953b41c9"})});</script>
+<title>The Gamma - Một Góc Nhìn Xa Hơn Về Tập Hợp</title>
+<style>
+  :root {
+    --ink: #1a1a17;
+    --ink-soft: #565248;
+    --paper: #faf7f0;
+    --paper-panel: #f1ecdf;
+    --rule: #d8d0bc;
+    --accent: #8a6d1f;
+    --accent-quiet: #cfc6a8;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece7da; --ink-soft: #b0aa97; --paper: #14130d;
+      --paper-panel: #1c1a12; --rule: #34301f; --accent: #d4b04a; --accent-quiet: #47401f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece7da; --ink-soft: #b0aa97; --paper: #14130d;
+    --paper-panel: #1c1a12; --rule: #34301f; --accent: #d4b04a; --accent-quiet: #47401f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Noto Serif", serif;
+    line-height: 1.7; -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .sans { font-family: "Helvetica Neue", Arial, sans-serif; }
+  section { padding: 4.5rem 1.5rem; }
+  .inner { max-width: 680px; margin: 0 auto; }
+
+  /* ---- hero ---- */
+  .hero {
+    position: relative;
+    padding-top: 5.5rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-gamma {
+    position: absolute;
+    top: -3.5rem; right: -1.5rem;
+    font-size: 22rem;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.07;
+    font-family: Georgia, serif;
+    pointer-events: none;
+    user-select: none;
+  }
+  .kicker {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.1em; color: var(--accent);
+    margin-bottom: 1.4rem; position: relative;
+  }
+  h1.title {
+    font-size: clamp(3rem, 9vw, 5.2rem);
+    line-height: 0.98;
+    margin: 0 0 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  .subtitle {
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+    color: var(--ink-soft);
+    margin: 0 0 2.2rem;
+    max-width: 30ch;
+    position: relative;
+  }
+  .lede {
+    font-size: 1.12rem;
+    max-width: 46ch;
+    margin: 0 0 3rem;
+    position: relative;
+  }
+  .facts {
+    display: flex; flex-wrap: wrap; gap: 0.6rem 1rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.86rem; color: var(--ink-soft);
+    padding-bottom: 2.8rem;
+    position: relative;
+  }
+  .facts span { white-space: nowrap; }
+  .facts span:not(:last-child)::after { content: ""; }
+
+  /* ---- sections ---- */
+  h2 {
+    font-size: 1.5rem; font-weight: 600; margin: 0 0 1.1rem;
+  }
+  p { margin: 0 0 1.1rem; max-width: 62ch; }
+  .quiet-rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+  /* ---- buy buttons ---- */
+  .buy-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.6rem; }
+  .buy-btn {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    display: inline-block;
+    padding: 0.85rem 1.6rem;
+    border: 1px solid var(--ink);
+    border-radius: 3px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .buy-btn:hover { background: var(--ink); color: var(--paper); }
+  .price-note {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.85rem; color: var(--ink-soft); margin-top: 1rem;
+  }
+
+  /* ---- contact panel ---- */
+  .contact-panel {
+    background: var(--paper-panel);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.6rem 1.8rem;
+  }
+  .contact-panel a {
+    color: var(--accent);
+  }
+
+  /* ---- footer ---- */
+  footer {
+    padding: 3rem 1.5rem 4rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+  }
+  footer .inner { display: flex; flex-direction: column; gap: 0.5rem; }
+  footer a { color: var(--ink-soft); }
+  footer .legal { line-height: 1.6; }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-gamma" aria-hidden="true">Γ</div>
+    <div class="inner">
+      <div class="kicker">SÁCH TOÁN HỌC · LÝ THUYẾT TẬP HỢP</div>
+      <h1 class="title">The Gamma</h1>
+      <p class="subtitle">Một Góc Nhìn Xa Hơn Về Tập Hợp</p>
+      <p class="lede">Một cách đọc lại nghịch lý Russell — không phải để xoá nó đi, mà để tách những điều nó vẫn gộp chung, và xây tiếp từ đó.</p>
+      <div class="facts sans">
+        <span>NXB Đại học Quốc gia TP.HCM</span>
+        <span>Bìa cứng</span>
+        <span>836 trang</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="inner">
+      <h2>Về cuốn sách</h2>
+      <p>Từ nghịch lý Russell, sách đặt lại câu hỏi quen thuộc của lý thuyết tập hợp: điều gì thật sự mâu thuẫn, và điều gì chỉ đang bị gộp chung một cách vội vã? Trên nền cổ điển mà độc giả đã quen, sách dựng dần một khung nhìn khác — Gamma — nơi các phân biệt bị bỏ qua trong lập luận Russell được tách bạch trở lại.</p>
+      <p>Bản đang phát hành dựng nền tảng cổ điển mà Gamma xuất phát từ đó. Phần hình thức hoá đầy đủ — hai loại đối tượng, các tầng, và bộ máy chứng minh — sẽ được trình bày trong bản tái bản.</p>
+    </div>
+  </section>
+
+  <hr class="quiet-rule">
+
+  <section>
+    <div class="inner">
+      <h2>Mua sách</h2>
+      <p class="price-note">Giá thay đổi theo từng thời điểm — xem giá hiện tại trực tiếp trên trang bán.</p>
+      <div class="buy-row">
+        <a class="buy-btn" href="https://tiki.vn/product-p279487424.html?spid=279487425" target="_blank" rel="noopener">Mua trên Tiki</a>
+        <a class="buy-btn" href="https://www.fahasa.com/mot-goc-nhin-xa-hon-ve-tap-hop-tiep-can-mo-rong-va-phi-chuan-bia-cung.html" target="_blank" rel="noopener">Mua trên Fahasa</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="inner">
+      <h2>Có câu hỏi về sách?</h2>
+      <div class="contact-panel">
+        <p style="margin-bottom:0.4rem">Nhắn tin trực tiếp cho Gamma Book Store trên Facebook — trả lời tự động cho câu hỏi thường gặp, và tác giả xem lại các trao đổi sâu hơn.</p>
+        <a href="https://www.facebook.com/thegammabook" target="_blank" rel="noopener">Gamma Book Store</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="inner">
+      <div class="legal">
+        HỘ KINH DOANH TM NGUYỄN BẢO CHÂU<br>
+        Thửa đất 335, Tờ bản đồ số 17, Ấp Thạnh Lợi, Xã Chợ Gạo, Tỉnh Đồng Tháp, Việt Nam
+      </div>
+      <div>
+        <a href="https://claude.ai/artifact/8Zg2hi3Mc2nTTnBJ6mN28t" target="_blank" rel="noopener">Chính sách quyền riêng tư</a>
+        &nbsp;·&nbsp;
+        <a href="https://claude.ai/artifact/DGJWhUZzoiTJAerfdsssLq" target="_blank" rel="noopener">Điều khoản dịch vụ</a>
+      </div>
+      <div>thegamma.math@gmail.com</div>
+    </div>
+  </footer>
+
+</body>
+</html>

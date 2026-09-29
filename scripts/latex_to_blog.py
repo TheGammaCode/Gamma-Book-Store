@@ -743,10 +743,6 @@ window.MathJax = {{
 
 <footer class="site-footer">
   <div class="inner">
-    <div class="legal">
-      HỘ KINH DOANH TM NGUYỄN BẢO CHÂU<br>
-      Thửa đất 335, Tờ bản đồ số 17, Ấp Thạnh Lợi, Xã Chợ Gạo, Tỉnh Đồng Tháp, Việt Nam
-    </div>
     <div>
       <a href="/feed.xml">RSS</a>
       &nbsp;·&nbsp;

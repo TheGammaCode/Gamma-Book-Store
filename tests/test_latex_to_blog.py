@@ -149,6 +149,8 @@ class ConverterTests(unittest.TestCase):
         # Trang đã commit phải khớp với bản sinh ra từ nguồn .tex.
         committed = (ROOT / "blog" / meta["slug"] / "index.html").read_text(encoding="utf-8")
         self.assertEqual(committed, page1)
+        self.assertNotIn("HỘ KINH DOANH", page1)
+        self.assertNotIn("\u2014", page1)
         for raw in ("\\begin{vd}", "\\tm{", "\\pl", "\\mnt", "\\mnn", "\\mnv", "\\cite", "lisanyuk"):
             self.assertNotIn(raw, page1)
 

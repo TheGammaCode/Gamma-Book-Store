@@ -29,7 +29,7 @@ Website HTML tĩnh, không framework và không bước build phía Netlify. Pro
 
 ## Bài viết hiện có
 
-- Nghịch lý Protagoras: Luật sư, người học trò và nửa học phí còn lại: `/blog/nghich-ly-luat-su-va-nguoi-hoc-tro/`
+- Nghịch lý Protagoras: Học Phí Một Nửa: `/blog/nghich-ly-luat-su-va-nguoi-hoc-tro/`
 
 ## Thêm bài mới
 

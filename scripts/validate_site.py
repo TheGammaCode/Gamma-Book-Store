@@ -115,6 +115,10 @@ def check_html():
             fail(f"{name}: Metricool tracking phải xuất hiện đúng một lần")
         if f'href="{SITE}/feed.xml"' not in text or 'type="application/rss+xml"' not in text:
             fail(f"{name}: thiếu RSS autodiscovery")
+        if "\u2014" in text:
+            fail(f"{name}: chứa dấu gạch dài (em dash)")
+        if ("HỘ KINH DOANH" in text) != (rel == "/"):
+            fail(f"{name}: khối hộ kinh doanh chỉ được xuất hiện ở trang chủ")
         for bad in ("localhost", "/blob/", "-original", "IMG_4684", "lisanyuk"):
             if bad in text:
                 fail(f"{name}: chứa '{bad}'")

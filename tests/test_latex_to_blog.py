@@ -150,6 +150,14 @@ class ConverterTests(unittest.TestCase):
         committed = (ROOT / "blog" / meta["slug"] / "index.html").read_text(encoding="utf-8")
         self.assertEqual(committed, page1)
         self.assertNotIn("HỘ KINH DOANH", page1)
+        # Khối hỏi đáp Messenger: đúng một khối, trỏ tới Page chính thức, nằm trước hàng điều hướng cuối bài.
+        self.assertEqual(page1.count('class="ask"'), 1)
+        self.assertEqual(page1.count("https://m.me/thegammabook"), 1)
+        self.assertIn("Có câu hỏi hoặc góc nhìn khác? Nhắn tin cho The Gamma.", page1)
+        self.assertIn("Hỏi về bài viết qua Messenger", page1)
+        self.assertLess(page1.index('class="ask"'), page1.index('class="cta-row"'))
+        self.assertGreater(page1.index('class="ask"'), page1.index('class="note"'))
+        self.assertLess(page1.index('class="cta-row"'), page1.index("<footer"))
         self.assertNotIn("\u2014", page1)
         for raw in ("\\begin{vd}", "\\tm{", "\\pl", "\\mnt", "\\mnn", "\\mnv", "\\cite", "lisanyuk"):
             self.assertNotIn(raw, page1)

@@ -137,6 +137,11 @@ def check_html():
         for tag in re.findall(r'<a [^>]*target="_blank"[^>]*>', text):
             if "noopener" not in tag:
                 fail(f"{name}: link target=_blank thiếu rel noopener: {tag[:80]}")
+        is_article = rel.startswith("/blog/") and rel != "/blog/"
+        if text.count('class="ask"') != (1 if is_article else 0):
+            fail(f"{name}: khối hỏi đáp Messenger phải có đúng 1 lần ở bài viết và không có ở trang khác")
+        if is_article and text.count('href="https://m.me/thegammabook" target="_blank" rel="noopener noreferrer"') != 1:
+            fail(f"{name}: thiếu link Messenger tới Page chính thức")
         if rel == "/" and text.count('<meta name="p:domain_verify"') != 1:
             fail(f"{name}: thiếu meta p:domain_verify")
         if "\u2014" in text:

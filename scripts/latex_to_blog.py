@@ -24,6 +24,8 @@ ROOT = Path(__file__).resolve().parent.parent
 CONTENT_DIR = ROOT / "content" / "blog"
 OUT_DIR = ROOT / "blog"
 SITE = "https://gammabook.store"
+# Cuộc trò chuyện Messenger với đúng Facebook Page chính thức (https://www.facebook.com/thegammabook/).
+MESSENGER_URL = "https://m.me/thegammabook"
 # Kênh mạng xã hội chính thức (nguồn duy nhất; cùng danh sách với footer và trang chủ).
 SOCIAL_URLS = [
     "https://www.facebook.com/thegammabook/",
@@ -742,6 +744,11 @@ window.MathJax = {{
     <aside class="note" aria-label="Ghi chú">
       <p>{a(meta['note'])}</p>
     </aside>
+
+    <section class="ask" aria-labelledby="ask-title">
+      <p class="ask__text" id="ask-title">Có câu hỏi hoặc góc nhìn khác? Nhắn tin cho The Gamma.</p>
+      <a class="btn" href="{MESSENGER_URL}" target="_blank" rel="noopener noreferrer">Hỏi về bài viết qua Messenger</a>
+    </section>
 
     <nav class="cta-row" aria-label="Điều hướng cuối bài">
       <a class="btn" href="/blog/">Quay lại Blog</a>

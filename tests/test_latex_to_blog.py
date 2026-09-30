@@ -162,6 +162,50 @@ class ConverterTests(unittest.TestCase):
         for raw in ("\\begin{vd}", "\\tm{", "\\pl", "\\mnt", "\\mnn", "\\mnv", "\\cite", "lisanyuk"):
             self.assertNotIn(raw, page1)
 
+    def _meta_with(self, **changes):
+        import json
+        import tempfile
+        meta = json.loads((ROOT / "content" / "blog" / "nghich-ly-luat-su-va-nguoi-hoc-tro.json").read_text(encoding="utf-8"))
+        meta.update(changes)
+        tmp = Path(tempfile.mkdtemp()) / "nghich-ly-luat-su-va-nguoi-hoc-tro.json"
+        tmp.write_text(json.dumps(meta), encoding="utf-8")
+        return tmp
+
+    def test_unapproved_image_is_refused(self):
+        with self.assertRaises(lb.LatexError):
+            lb.load_meta(self._meta_with(imageApproved=False), "nghich-ly-luat-su-va-nguoi-hoc-tro")
+
+    def test_image_source_validation(self):
+        slug = "nghich-ly-luat-su-va-nguoi-hoc-tro"
+        bad = [
+            {"type": "drive", "fileId": "https://drive.google.com/file/d/abc/view"},
+            {"type": "drive"},
+            {"type": "upload", "path": "../secret.jpg"},
+            {"type": "upload", "path": "assets/images/source/khong-ton-tai.jpg"},
+            {"type": "web", "url": "https://example.com/a.jpg"},
+        ]
+        for src in bad:
+            with self.subTest(src=src):
+                with self.assertRaises(lb.LatexError):
+                    lb.load_meta(self._meta_with(imageSource=src), slug)
+        ok = {"type": "drive", "fileId": "1959YVfbMNPpkNXjeTN9Q9VJ5GvCTMQZP"}
+        lb.load_meta(self._meta_with(imageSource=ok), slug)
+
+    def test_image_source_not_rendered(self):
+        tex = ROOT / "content" / "blog" / "nghich-ly-luat-su-va-nguoi-hoc-tro.tex"
+        meta, body, has_math, refs = lb.build(tex)
+        page = lb.render_page(meta, body, has_math, refs)
+        self.assertNotIn("imageSource", page)
+        self.assertNotIn("assets/images/source", page)
+        self.assertNotIn("drive.google.com", page)
+
+    def test_favicon_tags_in_template(self):
+        tex = ROOT / "content" / "blog" / "nghich-ly-luat-su-va-nguoi-hoc-tro.tex"
+        page = lb.render_page(*lb.build(tex))
+        for href in ("/favicon.ico", "/assets/favicon/favicon-32x32.png",
+                     "/assets/favicon/favicon-16x16.png", "/assets/favicon/apple-touch-icon.png"):
+            self.assertIn(f'href="{href}"', page)
+
     def test_input_path_is_restricted(self):
         with self.assertRaises(lb.LatexError):
             lb.resolve_input(str(ROOT / "README.md"))

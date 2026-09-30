@@ -137,6 +137,12 @@ def check_html():
         for tag in re.findall(r'<a [^>]*target="_blank"[^>]*>', text):
             if "noopener" not in tag:
                 fail(f"{name}: link target=_blank thiếu rel noopener: {tag[:80]}")
+        for href in ("/favicon.ico", "/assets/favicon/favicon-32x32.png",
+                     "/assets/favicon/favicon-16x16.png", "/assets/favicon/apple-touch-icon.png"):
+            if f'href="{href}"' not in text:
+                fail(f"{name}: thiếu thẻ favicon {href}")
+        if re.search(r"drive\.google\.com|googleusercontent\.com|docs\.google\.com", text):
+            fail(f"{name}: chứa link Google Drive/googleusercontent (không hotlink ảnh Drive)")
         is_article = rel.startswith("/blog/") and rel != "/blog/"
         if text.count('class="ask"') != (1 if is_article else 0):
             fail(f"{name}: khối hỏi đáp Messenger phải có đúng 1 lần ở bài viết và không có ở trang khác")

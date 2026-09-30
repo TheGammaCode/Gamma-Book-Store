@@ -573,7 +573,7 @@ def word_count(body_html):
 REQUIRED_META = [
     "slug", "title", "subtitle", "description", "datePublished", "dateModified",
     "readingTime", "canonical", "image", "imageAlt", "keywords", "citations",
-    "rssDescription", "note",
+    "rssDescription", "note", "imageSource", "imageApproved",
 ]
 WORDS_PER_MINUTE = 250  # âm tiết/phút, tính cả công thức; chỉ để gợi ý readingTime
 IMG_VARIANTS = ((800, 533), (1200, 800), (1600, 1067))
@@ -600,6 +600,18 @@ def load_meta(path, slug):
         raise LatexError(f"canonical phải là {SITE}/blog/{slug}/")
     if not isinstance(meta["readingTime"], int) or meta["readingTime"] < 1:
         raise LatexError("readingTime phải là số nguyên phút >= 1")
+    # Ảnh phải được tác giả duyệt trước khi xuất bản; nguồn ảnh chỉ để truy vết, không đưa vào HTML.
+    if meta["imageApproved"] is not True:
+        raise LatexError("imageApproved phải là true: tác giả chưa duyệt ảnh cho bài này")
+    src = meta["imageSource"]
+    if not isinstance(src, dict) or src.get("type") not in ("drive", "upload"):
+        raise LatexError('imageSource phải là {"type": "drive", "fileId": ...} hoặc {"type": "upload", "path": ...}')
+    if src["type"] == "drive" and not re.fullmatch(r"[A-Za-z0-9_-]{10,}", str(src.get("fileId", ""))):
+        raise LatexError("imageSource.fileId chỉ chứa mã file Drive, không dùng đường link")
+    if src["type"] == "upload":
+        rel = str(src.get("path", ""))
+        if not rel.startswith("assets/images/source/") or not (ROOT / rel).is_file():
+            raise LatexError("imageSource.path phải là file có thật trong assets/images/source/")
     for c in meta["citations"]:
         if not {"key", "text"} <= set(c):
             raise LatexError("mỗi citation cần trường key và text (dữ liệu thư mục thật)")
@@ -690,6 +702,10 @@ window.MathJax = {{
 <meta name="description" content="{desc}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="{canon}">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="The Gamma Blog RSS Feed" href="{SITE}/feed.xml">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Gamma Book Store">

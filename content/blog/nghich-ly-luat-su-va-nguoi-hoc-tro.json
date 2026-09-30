@@ -8,6 +8,12 @@
   "readingTime": 5,
   "canonical": "https://gammabook.store/blog/nghich-ly-luat-su-va-nguoi-hoc-tro/",
   "image": "nghich-ly-luat-su-va-nguoi-hoc-tro",
+  "imageSource": {
+    "type": "upload",
+    "path": "assets/images/source/nghich-ly-luat-su-va-nguoi-hoc-tro-original.jpg",
+    "originalName": "IMG_4684.JPG"
+  },
+  "imageApproved": true,
   "imageAlt": "Cuốn sách bìa cứng màu xanh đen có họa tiết vòng xoắn màu vàng ở giữa bìa, đặt trên nền sáng cạnh một chiếc bút.",
   "keywords": ["nghịch lý Protagoras", "logic", "nghịch lý", "lập luận", "The Gamma"],
   "citations": [],

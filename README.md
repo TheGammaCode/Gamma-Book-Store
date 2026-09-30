@@ -16,12 +16,15 @@ Website HTML tĩnh, không framework và không bước build phía Netlify. Pro
 │   └── <slug>.json                  # Metadata bài
 ├── assets/
 │   ├── css/blog.css
+│   ├── favicon/                     # favicon PNG và apple-touch-icon
 │   └── images/
 │       ├── source/<slug>-original.jpg   # Ảnh gốc, không dùng trong HTML
 │       └── blog/<slug>-{1600,1200,800,og}.jpg
-├── scripts/                         # latex_to_blog.py, optimize_images.py, validate_site.py
+├── scripts/                         # latex_to_blog.py, optimize_images.py, make_favicon.py, validate_site.py
 ├── tests/                           # test bộ chuyển đổi
-├── docs/latex-blog-authoring.md     # Tập LaTeX được hỗ trợ và quy trình chi tiết
+├── docs/latex-blog-authoring.md     # Tập LaTeX được hỗ trợ, quy trình bài và ảnh
+│   └── GammaBookStoreAvatar.jpg     # Logo gốc dùng để tạo favicon
+├── favicon.ico                      # tạo bằng scripts/make_favicon.py
 ├── feed.xml                         # RSS 2.0
 ├── sitemap.xml
 └── robots.txt
@@ -37,7 +40,7 @@ Slug: chữ thường, không dấu, nối bằng dấu gạch ngang.
 
 1. Tạo nguồn `content/blog/<slug>.tex`.
 2. Tạo metadata `content/blog/<slug>.json` (mẫu: bài hiện có).
-3. Đặt ảnh gốc vào `assets/images/source/<slug>-original.jpg`.
+3. Chọn ảnh: Claude Code đề xuất tối đa 3 ứng viên kèm lý do, tác giả duyệt một ảnh (chi tiết và giới hạn của Google Drive: `docs/latex-blog-authoring.md`, mục 8). Đặt ảnh gốc đã duyệt vào `assets/images/source/<slug>-original.jpg`, ghi `imageSource` và `imageApproved: true` trong `.json`.
 4. Tạo ảnh web: `python3 scripts/optimize_images.py assets/images/source/<slug>-original.jpg <slug>` (cần Pillow; ảnh OG phải dưới 1 MB).
 5. Chuyển đổi: `python3 scripts/latex_to_blog.py content/blog/<slug>.tex`.
 6. Cập nhật thẻ bài trong `blog/index.html`.
@@ -53,6 +56,7 @@ Lưu ý:
 - Không dùng macro chưa được hỗ trợ nếu chưa thêm parser và test.
 - Mọi công thức phải được xem thử bằng MathJax trong trình duyệt.
 - `\cite{key}` cần metadata thư mục thật trong `.json`; không bịa nguồn.
+- Không hotlink ảnh từ Google Drive và không đưa link Drive riêng tư, token hay credential vào Git hay HTML.
 - Không đưa ảnh nguồn nhiều MB vào HTML, RSS hay metadata mạng xã hội.
 - Mỗi bài cần SEO metadata, canonical, Open Graph, RSS autodiscovery, Metricool tracking và JSON-LD (bộ chuyển đổi tự thêm).
 

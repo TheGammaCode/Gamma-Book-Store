@@ -63,6 +63,8 @@ Mỗi bài có `content/blog/<slug>.json` cùng tên với `.tex`. Không suy đ
 | `canonical` | `https://gammabook.store/blog/<slug>/` |
 | `image` | tên gốc của bộ ảnh web (thường bằng slug) |
 | `imageAlt` | mô tả ảnh, chỉ dựa trên điều nhìn thấy trong ảnh |
+| `imageSource` | nguồn ảnh để truy vết: `{"type": "upload", "path": "assets/images/source/<slug>-original.jpg"}` hoặc `{"type": "drive", "fileId": "<mã file>"}`. Chỉ lưu mã file, không lưu link Drive, token hay credential. Không bao giờ được đưa vào HTML |
+| `imageApproved` | phải là `true` sau khi tác giả duyệt ảnh; converter từ chối sinh bài nếu khác `true` |
 | `keywords` | danh sách từ khóa trung tính |
 | `citations` | danh sách `{ "key", "text", "url"? }` (mục 6) |
 | `rssDescription` | mô tả cho `feed.xml` (văn bản thường, không LaTeX) |
@@ -85,14 +87,49 @@ python3 scripts/latex_to_blog.py content/blog/<slug>.tex
 Kết quả ghi vào `blog/<slug>/index.html` (đầy đủ head, Open Graph, JSON-LD, RSS autodiscovery,
 Metricool lấy nguyên từ `index.html`, MathJax chỉ khi bài có công thức). Cùng đầu vào cho cùng đầu ra.
 
-## 8. Ảnh
+## 8. Ảnh cho bài mới
 
-1. Đặt ảnh gốc vào `assets/images/source/<slug>-original.jpg` (không chỉnh sửa).
-2. Chạy `python3 scripts/optimize_images.py assets/images/source/<slug>-original.jpg <slug> [--og-top Y]`.
-3. Script tạo `assets/images/blog/<slug>-1600.jpg`, `-1200.jpg`, `-800.jpg` (JPEG progressive, chất lượng 85, giữ tỷ lệ,
-   không có EXIF/GPS) và `<slug>-og.jpg` (1200x630, crop từ ảnh nguồn, không kéo giãn). `--og-top` chọn mép trên của vùng crop (px trên ảnh nguồn).
-4. Mục tiêu dung lượng: 1600 dưới ~500 KB, 1200 dưới ~350 KB, 800 dưới ~220 KB, OG dưới 1 MB.
-5. Không dùng ảnh nguồn trong HTML, RSS hay metadata mạng xã hội. `validate_site.py` kiểm tra các ngưỡng này.
+### 8.1. Quy trình chọn ảnh (bắt buộc có bước duyệt)
+
+1. Tác giả gửi LaTeX của bài.
+2. Claude Code đề xuất **tối đa 3 ảnh ứng viên**, mỗi ảnh kèm lý do chọn (liên quan chủ đề, bố cục, chất lượng, có đủ độ phân giải cho crop 1200x630).
+3. Tác giả chọn một ảnh (hoặc yêu cầu đổi). Chỉ sau đó ảnh mới được dùng. Không tự đăng ảnh chưa duyệt.
+4. Chỉ dùng ảnh tác giả có quyền sử dụng (ảnh trong Drive của Gamma hoặc ảnh tác giả gửi). Không lấy ảnh từ Google Images hay Internet.
+
+### 8.2. Claude Code lấy ảnh từ đâu
+
+Kiểm tra thực tế trong phiên ngày 30/09/2026: Claude Code **có** connector Google Drive (chỉ đọc được khi connector đang được gắn vào phiên;
+việc Drive nối với Metricool không liên quan). Tuy nhiên connector có giới hạn:
+
+- **Tìm được** file theo tên, thư mục, ngày, loại (`mimeType contains 'image/'`) và trả về ID, dung lượng, chủ sở hữu.
+- **Không xem được nội dung ảnh**: `read_file_content` trả về rỗng với ảnh. Vì vậy Claude Code không thể chọn ảnh theo nội dung hay kiểm tra bố cục chỉ từ Drive.
+- **Không tải được ảnh gốc về repo**: `download_file_content` trả về base64 vào cuộc hội thoại, không ghi ra file, và ảnh gốc hàng chục MB là không khả thi.
+
+Quy trình ổn định vì thế là:
+
+1. (Tùy chọn, khi connector có mặt) Claude Code tìm trong Drive theo chủ đề/tên/ngày và liệt kê ứng viên kèm ID để tác giả biết ảnh nào.
+2. Để xem ảnh, tác giả đưa **tối đa 3 ảnh ứng viên** cho Claude Code bằng một trong hai cách: đính kèm trực tiếp vào cuộc trò chuyện, hoặc
+   commit vào `assets/images/source/` (ảnh gốc). Claude Code xem ảnh thật, đề xuất lý do chọn và alt text.
+3. Tác giả chọn ảnh. Ảnh gốc được lưu **không sửa** tại `assets/images/source/<slug>-original.jpg`.
+4. Nếu ảnh xuất phát từ Drive, ghi `imageSource` dạng `drive` với `fileId`; nếu tác giả gửi file thì dùng dạng `upload` với `path`.
+5. Tác giả cần cung cấp (hoặc kết nối) gì: khi muốn Claude Code tìm trong Drive, hãy bảo đảm connector Google Drive được bật cho phiên; luôn cần đưa file ảnh (đính kèm hoặc commit) để Claude Code xem và xử lý.
+
+Không dùng OAuth/API riêng, không hotlink ảnh từ Drive (`drive.google.com`, `googleusercontent.com`): `validate_site.py` sẽ báo lỗi nếu HTML có link đó.
+
+### 8.3. Xử lý ảnh đã duyệt
+
+1. `python3 scripts/optimize_images.py assets/images/source/<slug>-original.jpg <slug> [--og-top Y]`.
+2. Script tạo `assets/images/blog/<slug>-1600.jpg`, `-1200.jpg`, `-800.jpg` (JPEG progressive, chất lượng 85, giữ tỷ lệ,
+   **không có EXIF/GPS**) và `<slug>-og.jpg` (1200x630, crop từ ảnh nguồn, không kéo giãn). `--og-top` chọn mép trên của vùng crop (px trên ảnh nguồn).
+3. Mục tiêu dung lượng: 1600 dưới ~500 KB, 1200 dưới ~350 KB, 800 dưới ~220 KB, OG dưới 1 MB. Ảnh nguồn không dùng trong HTML, RSS hay metadata mạng xã hội.
+4. Cập nhật `.json`: `image`, `imageAlt` (chỉ mô tả điều nhìn thấy trong ảnh, không suy diễn), `imageSource`, `imageApproved: true`.
+5. Sinh bài, cập nhật `blog/index.html`, `feed.xml` (nếu cần) và `sitemap.xml`, rồi chạy `python3 scripts/validate_site.py` để kiểm tra link ảnh và không có hotlink Drive.
+
+### 8.4. Favicon
+
+Favicon tạo từ logo gốc `docs/GammaBookStoreAvatar.jpg` bằng `python3 scripts/make_favicon.py` (crop vuông và thu nhỏ, không vẽ lại).
+File: `favicon.ico` (thư mục gốc), `assets/favicon/favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`.
+Template sinh bài đã có sẵn thẻ favicon; trang mới viết tay phải copy 4 thẻ `<link rel="icon">` / `apple-touch-icon` từ trang chủ.
 
 ## 9. Sau khi sinh bài
 

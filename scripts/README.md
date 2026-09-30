@@ -6,6 +6,7 @@ Công cụ chạy trên máy tác giả. Netlify chỉ phục vụ file tĩnh, k
 | --- | --- | --- |
 | `latex_to_blog.py` | Chuyển `content/blog/<slug>.tex` + `<slug>.json` thành `blog/<slug>/index.html` | Python 3 (thư viện chuẩn) |
 | `optimize_images.py` | Tạo ảnh web 1600/1200/800 và ảnh Open Graph 1200x630 từ ảnh nguồn | Python 3 + Pillow |
+| `make_favicon.py` | Tạo favicon.ico và favicon PNG từ logo gốc (chỉ crop và thu nhỏ) | Python 3 + Pillow |
 | `validate_site.py` | Kiểm tra HTML, JSON-LD, RSS, sitemap, ảnh và HTTP local | Python 3 (thư viện chuẩn) |
 
 ```

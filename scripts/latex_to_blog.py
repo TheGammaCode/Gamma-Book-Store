@@ -690,7 +690,7 @@ window.MathJax = {{
 <link rel="canonical" href="{canon}">
 <link rel="alternate" type="application/rss+xml" title="The Gamma Blog RSS Feed" href="{SITE}/feed.xml">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="The Gamma">
+<meta property="og:site_name" content="Gamma Book Store">
 <meta property="og:locale" content="vi_VN">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -713,7 +713,7 @@ window.MathJax = {{
 <body>
 <header class="site-header">
   <div class="inner">
-    <a class="brand" href="/">The Gamma</a>
+    <a class="brand" href="/">Gamma Book Store</a>
     <nav aria-label="Điều hướng chính">
       <ul>
         <li><a href="/">Trang chủ</a></li>

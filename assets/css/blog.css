@@ -112,3 +112,15 @@ mjx-container[display="true"] { display: block; max-width: 100%; overflow-x: aut
 .site-footer { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--rule); font-size: 0.78rem; color: var(--ink-soft); }
 .site-footer .inner { display: flex; flex-direction: column; gap: 0.5rem; }
 .site-footer a { color: var(--ink-soft); }
+
+/* theo dõi Gamma: hàng icon thu gọn trong footer */
+.follow-mini { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1rem; margin-bottom: 0.75rem; }
+.follow-mini__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.follow-mini__link {
+  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+  border: 1px solid var(--rule); border-radius: 50%; color: var(--ink-soft);
+  transition: transform 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.follow-mini__link svg { width: 20px; height: 20px; }
+.follow-mini__link:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .follow-mini__link { transition: none; } .follow-mini__link:hover { transform: none; } }

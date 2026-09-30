@@ -22,6 +22,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://gammabook.store"
+SOCIAL = [
+    "https://www.facebook.com/thegammabook/",
+    "https://www.instagram.com/thegamma.math",
+    "https://www.threads.com/@thegamma.math",
+    "https://www.tiktok.com/@gammabook.store",
+    "https://www.youtube.com/@gammabookstore",
+]
 ATOM = "{http://www.w3.org/2005/Atom}"
 SM = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
 METRICOOL_HASH = "9747b99897eb037092e02bbf953b41c9"
@@ -115,6 +122,14 @@ def check_html():
             fail(f"{name}: Metricool tracking phải xuất hiện đúng một lần")
         if f'href="{SITE}/feed.xml"' not in text or 'type="application/rss+xml"' not in text:
             fail(f"{name}: thiếu RSS autodiscovery")
+        for url in SOCIAL:
+            if text.count(f'href="{url}"') < 1:
+                fail(f"{name}: thiếu link mạng xã hội {url}")
+        if re.search(r'href="(?:#|)"', text):
+            fail(f"{name}: có href rỗng hoặc '#'")
+        for tag in re.findall(r'<a [^>]*target="_blank"[^>]*>', text):
+            if "noopener" not in tag:
+                fail(f"{name}: link target=_blank thiếu rel noopener: {tag[:80]}")
         if "\u2014" in text:
             fail(f"{name}: chứa dấu gạch dài (em dash)")
         if ("HỘ KINH DOANH" in text) != (rel == "/"):
@@ -150,6 +165,10 @@ def check_html():
         for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', text, re.S):
             try:
                 ld = json.loads(block)
+                if ld.get("@type") == "Organization":
+                    if sorted(ld.get("sameAs", [])) != sorted(SOCIAL):
+                        fail(f"{name}: Organization sameAs không khớp 5 kênh chính thức")
+                    continue
                 for k in ("@context", "@type", "headline", "description", "image", "datePublished",
                           "dateModified", "inLanguage", "mainEntityOfPage", "author", "publisher"):
                     if k not in ld:

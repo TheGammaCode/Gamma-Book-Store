@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"9747b99897eb037092e02bbf953b41c9"})});</script>
 <title>The Gamma - Một Góc Nhìn Xa Hơn Về Tập Hợp</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "The Gamma",
+  "alternateName": "Gamma Book Store",
+  "url": "https://gammabook.store/",
+  "sameAs": [
+    "https://www.facebook.com/thegammabook/",
+    "https://www.instagram.com/thegamma.math",
+    "https://www.threads.com/@thegamma.math",
+    "https://www.tiktok.com/@gammabook.store",
+    "https://www.youtube.com/@gammabookstore"
+  ]
+}
+</script>
 <link rel="alternate" type="application/rss+xml" title="The Gamma Blog RSS Feed" href="https://gammabook.store/feed.xml">
 <style>
   :root {
@@ -141,6 +157,35 @@
     color: var(--ink-soft);
     border-top: 1px solid var(--rule);
   }
+  /* ---- theo dõi Gamma (mạng xã hội): thẻ nhẹ, khác nút mua sách ---- */
+  .follow-lede {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.95rem; color: var(--ink-soft); margin: 0 0 1.8rem;
+  }
+  .follow-grid { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  .follow-grid li { flex: 0 0 calc((100% - 0.75rem) / 2); display: flex; }
+  .follow-card {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem;
+    width: 100%; min-height: 44px; padding: 1rem 1rem 1.1rem;
+    border: 1px solid var(--rule); border-radius: 14px;
+    color: var(--ink); text-decoration: none;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+  .follow-card__icon {
+    display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 0.4rem;
+    border-radius: 50%; background: var(--paper-panel); color: var(--accent);
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+  .follow-card__icon svg { width: 22px; height: 22px; }
+  .follow-card__name { font-weight: 600; font-size: 0.98rem; }
+  .follow-card__sub { font-size: 0.8rem; line-height: 1.4; color: var(--ink-soft); }
+  .follow-card:hover, .follow-card:focus-visible { transform: translateY(-3px); border-color: var(--accent); }
+  .follow-card:hover .follow-card__icon, .follow-card:focus-visible .follow-card__icon { background: var(--accent); color: var(--paper); }
+  .follow-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  @media (min-width: 560px) { .follow-grid li { flex-basis: calc((100% - 1.5rem) / 3); } }
+  @media (prefers-reduced-motion: reduce) { .follow-card, .follow-card__icon { transition: none; } .follow-card:hover, .follow-card:focus-visible { transform: none; } }
+
   footer .inner { display: flex; flex-direction: column; gap: 0.5rem; }
   footer a { color: var(--ink-soft); }
   /* 50% của 0.78rem là 0.39rem (~6,2px), thấp hơn ngưỡng đọc được; kẹp tối thiểu 0.5rem (8px). */
@@ -190,8 +235,54 @@
       <h2>Có câu hỏi về sách?</h2>
       <div class="contact-panel">
         <p style="margin-bottom:0.4rem">Nhắn tin trực tiếp cho Gamma Book Store trên Facebook; trả lời tự động cho câu hỏi thường gặp, và tác giả xem lại các trao đổi sâu hơn.</p>
-        <a href="https://www.facebook.com/thegammabook" target="_blank" rel="noopener">Gamma Book Store</a>
+        <a href="https://www.facebook.com/thegammabook/" target="_blank" rel="noopener noreferrer">Gamma Book Store</a>
       </div>
+    </div>
+  </section>
+
+  <hr class="quiet-rule">
+
+  <section aria-labelledby="follow-title">
+    <div class="inner">
+      <h2 id="follow-title">Theo dõi Gamma</h2>
+      <p class="follow-lede">Theo dõi để nhận thêm những câu chuyện về tập hợp, logic và vô hạn.</p>
+      <ul class="follow-grid">
+        <li>
+          <a class="follow-card" href="https://www.facebook.com/thegammabook/" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên Facebook">
+            <span class="follow-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+            <span class="follow-card__name">Facebook</span>
+            <span class="follow-card__sub">Tin tức &amp; thảo luận</span>
+          </a>
+        </li>
+        <li>
+          <a class="follow-card" href="https://www.instagram.com/thegamma.math" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên Instagram">
+            <span class="follow-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+            <span class="follow-card__name">Instagram</span>
+            <span class="follow-card__sub">Hình ảnh &amp; trích đoạn</span>
+          </a>
+        </li>
+        <li>
+          <a class="follow-card" href="https://www.threads.com/@thegamma.math" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên Threads">
+            <span class="follow-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></span>
+            <span class="follow-card__name">Threads</span>
+            <span class="follow-card__sub">Trao đổi nhanh</span>
+          </a>
+        </li>
+        <li>
+          <a class="follow-card" href="https://www.tiktok.com/@gammabook.store" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên TikTok">
+            <span class="follow-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></span>
+            <span class="follow-card__name">TikTok</span>
+            <span class="follow-card__sub">Video ngắn</span>
+          </a>
+        </li>
+        <li>
+          <a class="follow-card" href="https://www.youtube.com/@gammabookstore" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên YouTube">
+            <span class="follow-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></span>
+            <span class="follow-card__name">YouTube</span>
+            <span class="follow-card__sub">Video giải thích</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </section>
 

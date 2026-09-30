@@ -24,6 +24,14 @@ ROOT = Path(__file__).resolve().parent.parent
 CONTENT_DIR = ROOT / "content" / "blog"
 OUT_DIR = ROOT / "blog"
 SITE = "https://gammabook.store"
+# Kênh mạng xã hội chính thức (nguồn duy nhất; cùng danh sách với footer và trang chủ).
+SOCIAL_URLS = [
+    "https://www.facebook.com/thegammabook/",
+    "https://www.instagram.com/thegamma.math",
+    "https://www.threads.com/@thegamma.math",
+    "https://www.tiktok.com/@gammabook.store",
+    "https://www.youtube.com/@gammabookstore",
+]
 
 MATHJAX_URL = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"
 MATHJAX_SRI = "sha384-KKWa9jJ1MZvssLeOoXG6FiOAZfAgmzsIIfw8BXwI9+kYm0lPCbC6yTQPBC00F1/L"
@@ -637,8 +645,8 @@ def render_page(meta, body, has_math, references):
         "inLanguage": "vi-VN",
         "mainEntityOfPage": canon,
         "keywords": ", ".join(meta["keywords"]),
-        "author": {"@type": "Organization", "name": "The Gamma", "url": SITE + "/"},
-        "publisher": {"@type": "Organization", "name": "The Gamma", "url": SITE + "/"},
+        "author": {"@type": "Organization", "name": "The Gamma", "url": SITE + "/", "sameAs": SOCIAL_URLS},
+        "publisher": {"@type": "Organization", "name": "The Gamma", "url": SITE + "/", "sameAs": SOCIAL_URLS},
     }
     ld_json = json.dumps(ld, ensure_ascii=False, indent=2).replace("</", "<\\/")
 
@@ -743,6 +751,16 @@ window.MathJax = {{
 
 <footer class="site-footer">
   <div class="inner">
+    <div class="follow-mini">
+      <span class="follow-mini__label">Theo dõi Gamma</span>
+      <ul class="follow-mini__list">
+        <li><a class="follow-mini__link" href="https://www.facebook.com/thegammabook/" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></li>
+        <li><a class="follow-mini__link" href="https://www.instagram.com/thegamma.math" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></li>
+        <li><a class="follow-mini__link" href="https://www.threads.com/@thegamma.math" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên Threads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg></a></li>
+        <li><a class="follow-mini__link" href="https://www.tiktok.com/@gammabook.store" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a></li>
+        <li><a class="follow-mini__link" href="https://www.youtube.com/@gammabookstore" target="_blank" rel="noopener noreferrer" aria-label="Gamma trên YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a></li>
+      </ul>
+    </div>
     <div>
       <a href="/feed.xml">RSS</a>
       &nbsp;·&nbsp;

@@ -108,7 +108,8 @@ mjx-container[display="true"] { display: block; max-width: 100%; overflow-x: aut
 
 /* lời mời hỏi đáp qua Messenger (cuối bài, trước hàng điều hướng) */
 .ask { margin: 2.5rem 0 0; padding: 1.5rem 0 0; border-top: 1px solid var(--rule); }
-.ask__text { margin: 0 0 1rem; max-width: none; font-size: 1.05rem; }
+.ask__text { margin: 0 0 1rem; font-size: 1.05rem; }
+.ask__fallback { margin: 1rem 0 0; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 0.875rem; color: var(--ink-soft); }
 .ask .btn { min-height: 44px; }
 @media (max-width: 480px) { .ask .btn { display: block; text-align: center; } }
 .cta-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 2.5rem 0 4rem; }

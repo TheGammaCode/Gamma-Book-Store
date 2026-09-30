@@ -27,6 +27,8 @@ SITE = "https://gammabook.store"
 BRAND = "Gamma Book Store"  # tên thương hiệu hiển thị (không dùng "The Gamma")
 # Cuộc trò chuyện Messenger với đúng Facebook Page chính thức (https://www.facebook.com/thegammabook/).
 MESSENGER_URL = "https://m.me/thegammabook"
+# Đường dự phòng khi m.me không mở được (ví dụ trên desktop): trang Facebook Page chính thức có nút Nhắn tin.
+FACEBOOK_PAGE_URL = "https://www.facebook.com/thegammabook/"
 # Kênh mạng xã hội chính thức (nguồn duy nhất; cùng danh sách với footer và trang chủ).
 SOCIAL_URLS = [
     "https://www.facebook.com/thegammabook/",
@@ -765,6 +767,7 @@ window.MathJax = {{
     <section class="ask" aria-labelledby="ask-title">
       <p class="ask__text" id="ask-title">Có câu hỏi hoặc góc nhìn khác? Nhắn tin cho {BRAND}.</p>
       <a class="btn" href="{MESSENGER_URL}" target="_blank" rel="noopener noreferrer">Hỏi về bài viết qua Messenger</a>
+      <p class="ask__fallback">Nút không mở được? <a href="{FACEBOOK_PAGE_URL}" target="_blank" rel="noopener noreferrer">Mở Facebook Page {BRAND}</a> rồi bấm Nhắn tin (Message).</p>
     </section>
 
     <nav class="cta-row" aria-label="Điều hướng cuối bài">

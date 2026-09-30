@@ -148,6 +148,8 @@ def check_html():
             fail(f"{name}: khối hỏi đáp Messenger phải có đúng 1 lần ở bài viết và không có ở trang khác")
         if is_article and text.count('href="https://m.me/thegammabook" target="_blank" rel="noopener noreferrer"') != 1:
             fail(f"{name}: thiếu link Messenger tới Page chính thức")
+        if is_article and 'class="ask__fallback"' not in text:
+            fail(f"{name}: thiếu đường dự phòng tới Facebook Page trong khối hỏi đáp")
         if rel == "/" and text.count('<meta name="p:domain_verify"') != 1:
             fail(f"{name}: thiếu meta p:domain_verify")
         if "\u2014" in text:

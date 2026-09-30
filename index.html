@@ -41,7 +41,7 @@
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --ink: #ece7da; --ink-soft: #b0aa97; --paper: #14130d;
@@ -113,7 +113,7 @@
   .facts {
     display: flex; flex-wrap: wrap; gap: 0.6rem 1rem;
     font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.86rem; color: var(--ink-soft);
+    font-size: 0.9rem; color: var(--ink-soft);
     padding-bottom: 2.8rem;
     position: relative;
   }
@@ -143,7 +143,7 @@
   .buy-btn:hover { background: var(--ink); color: var(--paper); }
   .price-note {
     font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.85rem; color: var(--ink-soft); margin-top: 1rem;
+    font-size: 0.95rem; color: var(--ink-soft); margin-top: 1rem;
   }
 
   /* ---- contact panel ---- */
@@ -156,6 +156,8 @@
   .contact-panel a {
     color: var(--accent);
   }
+  /* điện thoại: bớt padding kép (section 1.5rem + panel 1.8rem) để chữ trong ô không bị bóp còn ~27 ký tự/dòng */
+  @media (max-width: 480px) { .contact-panel { padding: 1.25rem 1.1rem; } }
   /* liên kết Blog trong ô câu hỏi: cùng ngôn ngữ icon tròn với khu "Theo dõi Gamma" */
   .contact-panel a.panel-blog {
     display: flex; align-items: center; gap: 0.9rem; min-height: 44px;
@@ -171,7 +173,7 @@
   .panel-blog__icon svg { width: 30px; height: 30px; }
   .panel-blog__text { display: flex; flex-direction: column; gap: 0.15rem; }
   .panel-blog__name { font-weight: 600; font-size: 0.98rem; }
-  .panel-blog__sub { font-size: 0.8rem; line-height: 1.4; color: var(--ink-soft); }
+  .panel-blog__sub { font-size: 0.875rem; line-height: 1.4; color: var(--ink-soft); }
   .contact-panel a.panel-blog:hover .panel-blog__icon,
   .contact-panel a.panel-blog:focus-visible .panel-blog__icon { background: var(--accent); color: var(--paper); }
   .contact-panel a.panel-blog:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
@@ -188,7 +190,7 @@
   /* ---- theo dõi Gamma (mạng xã hội): thẻ nhẹ, khác nút mua sách ---- */
   .follow-lede {
     font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.95rem; color: var(--ink-soft); margin: 0 0 1.8rem;
+    font-size: 1rem; color: var(--ink-soft); margin: 0 0 1.8rem;
   }
   .follow-grid { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
   .follow-grid li { flex: 0 0 calc((100% - 0.75rem) / 2); display: flex; }
@@ -207,7 +209,7 @@
   }
   .follow-card__icon svg { width: 30px; height: 30px; }
   .follow-card__name { font-weight: 600; font-size: 0.98rem; }
-  .follow-card__sub { font-size: 0.8rem; line-height: 1.4; color: var(--ink-soft); }
+  .follow-card__sub { font-size: 0.875rem; line-height: 1.4; color: var(--ink-soft); }
   .follow-card:hover, .follow-card:focus-visible { transform: translateY(-3px); border-color: var(--accent); }
   .follow-card:hover .follow-card__icon, .follow-card:focus-visible .follow-card__icon { background: var(--accent); color: var(--paper); }
   .follow-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }

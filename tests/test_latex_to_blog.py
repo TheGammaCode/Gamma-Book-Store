@@ -155,6 +155,8 @@ class ConverterTests(unittest.TestCase):
         self.assertEqual(page1.count("https://m.me/thegammabook"), 1)
         self.assertIn("Có câu hỏi hoặc góc nhìn khác? Nhắn tin cho Gamma Book Store.", page1)
         self.assertIn("Hỏi về bài viết qua Messenger", page1)
+        self.assertEqual(page1.count('class="ask__fallback"'), 1)
+        self.assertIn('href="https://www.facebook.com/thegammabook/"', page1[page1.index('class="ask__fallback"'):])
         self.assertLess(page1.index('class="ask"'), page1.index('class="cta-row"'))
         self.assertGreater(page1.index('class="ask"'), page1.index('class="note"'))
         self.assertLess(page1.index('class="cta-row"'), page1.index("<footer"))

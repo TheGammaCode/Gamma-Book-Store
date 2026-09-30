@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CONTENT_DIR = ROOT / "content" / "blog"
 OUT_DIR = ROOT / "blog"
 SITE = "https://gammabook.store"
+BRAND = "Gamma Book Store"  # tên thương hiệu hiển thị (không dùng "The Gamma")
 # Cuộc trò chuyện Messenger với đúng Facebook Page chính thức (https://www.facebook.com/thegammabook/).
 MESSENGER_URL = "https://m.me/thegammabook"
 # Kênh mạng xã hội chính thức (nguồn duy nhất; cùng danh sách với footer và trang chủ).
@@ -660,8 +661,8 @@ def render_page(meta, body, has_math, references):
         "inLanguage": "vi-VN",
         "mainEntityOfPage": canon,
         "keywords": ", ".join(meta["keywords"]),
-        "author": {"@type": "Organization", "name": "Gamma Book Store", "url": SITE + "/", "sameAs": SOCIAL_URLS},
-        "publisher": {"@type": "Organization", "name": "Gamma Book Store", "url": SITE + "/", "sameAs": SOCIAL_URLS},
+        "author": {"@type": "Organization", "name": BRAND, "url": SITE + "/", "sameAs": SOCIAL_URLS},
+        "publisher": {"@type": "Organization", "name": BRAND, "url": SITE + "/", "sameAs": SOCIAL_URLS},
     }
     ld_json = json.dumps(ld, ensure_ascii=False, indent=2).replace("</", "<\\/")
 
@@ -698,7 +699,7 @@ window.MathJax = {{
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {metricool_script()}
-<title>{title} | The Gamma</title>
+<title>{title} | {BRAND}</title>
 <meta name="description" content="{desc}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="{canon}">
@@ -706,9 +707,9 @@ window.MathJax = {{
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
 <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
-<link rel="alternate" type="application/rss+xml" title="The Gamma Blog RSS Feed" href="{SITE}/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="{BRAND} Blog RSS Feed" href="{SITE}/feed.xml">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="Gamma Book Store">
+<meta property="og:site_name" content="{BRAND}">
 <meta property="og:locale" content="vi_VN">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -731,7 +732,7 @@ window.MathJax = {{
 <body>
 <header class="site-header">
   <div class="inner">
-    <a class="brand" href="/">Gamma Book Store</a>
+    <a class="brand" href="/">{BRAND}</a>
     <nav aria-label="Điều hướng chính">
       <ul>
         <li><a href="/">Trang chủ</a></li>
@@ -762,13 +763,13 @@ window.MathJax = {{
     </aside>
 
     <section class="ask" aria-labelledby="ask-title">
-      <p class="ask__text" id="ask-title">Có câu hỏi hoặc góc nhìn khác? Nhắn tin cho The Gamma.</p>
+      <p class="ask__text" id="ask-title">Có câu hỏi hoặc góc nhìn khác? Nhắn tin cho {BRAND}.</p>
       <a class="btn" href="{MESSENGER_URL}" target="_blank" rel="noopener noreferrer">Hỏi về bài viết qua Messenger</a>
     </section>
 
     <nav class="cta-row" aria-label="Điều hướng cuối bài">
       <a class="btn" href="/blog/">Quay lại Blog</a>
-      <a class="btn" href="/">Khám phá The Gamma</a>
+      <a class="btn" href="/">Khám phá {BRAND}</a>
     </nav>
   </article>
 </main>

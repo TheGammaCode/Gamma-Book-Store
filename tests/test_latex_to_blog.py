@@ -153,7 +153,7 @@ class ConverterTests(unittest.TestCase):
         # Khối hỏi đáp Messenger: đúng một khối, trỏ tới Page chính thức, nằm trước hàng điều hướng cuối bài.
         self.assertEqual(page1.count('class="ask"'), 1)
         self.assertEqual(page1.count("https://m.me/thegammabook"), 1)
-        self.assertIn("Có câu hỏi hoặc góc nhìn khác? Nhắn tin cho The Gamma.", page1)
+        self.assertIn("Có câu hỏi hoặc góc nhìn khác? Nhắn tin cho Gamma Book Store.", page1)
         self.assertIn("Hỏi về bài viết qua Messenger", page1)
         self.assertLess(page1.index('class="ask"'), page1.index('class="cta-row"'))
         self.assertGreater(page1.index('class="ask"'), page1.index('class="note"'))
@@ -205,6 +205,29 @@ class ConverterTests(unittest.TestCase):
         for href in ("/favicon.ico", "/assets/favicon/favicon-32x32.png",
                      "/assets/favicon/favicon-16x16.png", "/assets/favicon/apple-touch-icon.png"):
             self.assertIn(f'href="{href}"', page)
+
+    def test_css_has_no_character_width_caps(self):
+        # Chống tái phát: max-width theo ký tự (ch) làm khối chữ hẹp hơn ảnh và khung Ví dụ.
+        css = (ROOT / "assets" / "css" / "blog.css").read_text(encoding="utf-8")
+        self.assertNotRegex(css, r"max-width:\s*[\d.]+ch")
+
+    def test_brand_name_is_unified(self):
+        import re
+        self.assertEqual(lb.BRAND, "Gamma Book Store")
+        tex = ROOT / "content" / "blog" / "nghich-ly-luat-su-va-nguoi-hoc-tro.tex"
+        meta, body, has_math, refs = lb.build(tex)
+        page = lb.render_page(meta, body, has_math, refs)
+        # Ngoại lệ được phép: tên tác phẩm trong nội dung bài (\eng{...}) chỉ gồm "Protagoras Paradox".
+        self.assertNotIn("The Gamma", page)
+        self.assertIn('<meta property="og:site_name" content="Gamma Book Store">', page)
+        self.assertIn('<a class="brand" href="/">Gamma Book Store</a>', page)
+        self.assertIn("| Gamma Book Store</title>", page)
+        self.assertIn("Khám phá Gamma Book Store", page)
+        self.assertEqual(page.count('"name": "Gamma Book Store"'), 2)
+        for path in ("content/blog/nghich-ly-luat-su-va-nguoi-hoc-tro.json", "feed.xml", "blog/index.html"):
+            text = (ROOT / path).read_text(encoding="utf-8")
+            self.assertNotIn("The Gamma", text, path)
+            self.assertNotIn("THE GAMMA", text, path)
 
     def test_input_path_is_restricted(self):
         with self.assertRaises(lb.LatexError):

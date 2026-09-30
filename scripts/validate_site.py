@@ -28,6 +28,7 @@ SOCIAL = [
     "https://www.threads.com/@thegamma.math",
     "https://www.tiktok.com/@gammabook.store",
     "https://www.youtube.com/@gammabookstore",
+    "https://www.pinterest.com/thegammamath/",
 ]
 ATOM = "{http://www.w3.org/2005/Atom}"
 SM = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
@@ -65,6 +66,12 @@ class Page(HTMLParser):
         for part in (a.get("srcset") or "").split(","):
             if part.strip():
                 self.refs.append(part.strip().split()[0])
+
+    def handle_startendtag(self, tag, attrs):
+        # <tag ... /> không cần thẻ đóng: chỉ ghi nhận thuộc tính, không đẩy vào stack.
+        self.handle_starttag(tag, attrs)
+        if tag not in VOID:
+            self.stack.pop()
 
     def handle_endtag(self, tag):
         if not self.stack or self.stack[-1] != tag:
@@ -130,6 +137,8 @@ def check_html():
         for tag in re.findall(r'<a [^>]*target="_blank"[^>]*>', text):
             if "noopener" not in tag:
                 fail(f"{name}: link target=_blank thiếu rel noopener: {tag[:80]}")
+        if rel == "/" and text.count('<meta name="p:domain_verify"') != 1:
+            fail(f"{name}: thiếu meta p:domain_verify")
         if "\u2014" in text:
             fail(f"{name}: chứa dấu gạch dài (em dash)")
         if ("HỘ KINH DOANH" in text) != (rel == "/"):

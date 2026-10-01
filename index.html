@@ -106,7 +106,6 @@
   }
   .lede {
     font-size: 1.12rem;
-    max-width: 46ch;
     margin: 0 0 3rem;
     position: relative;
   }
@@ -124,7 +123,8 @@
   h2 {
     font-size: 1.5rem; font-weight: 600; margin: 0 0 1.1rem;
   }
-  p { margin: 0 0 1.1rem; max-width: 62ch; }
+  /* Chiều rộng cột chữ do .inner (680px) quyết định, đồng nhất với thẻ, ô hỏi đáp và nút; không đặt max-width theo ch vì ch đổi theo cỡ chữ và font. */
+  p { margin: 0 0 1.1rem; text-wrap: pretty; }
   .quiet-rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
 
   /* ---- buy buttons ---- */

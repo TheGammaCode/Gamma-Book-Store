@@ -213,6 +213,11 @@ class ConverterTests(unittest.TestCase):
         css = (ROOT / "assets" / "css" / "blog.css").read_text(encoding="utf-8")
         self.assertNotRegex(css, r"max-width:\s*[\d.]+ch")
 
+    def test_homepage_css_has_no_character_width_caps(self):
+        # Chống tái phát trên trang chủ: max-width theo ch làm đoạn chữ hẹp hơn thẻ và ô hỏi đáp trên desktop.
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertNotRegex(html, r"max-width:\s*[\d.]+ch")
+
     def test_brand_name_is_unified(self):
         import re
         self.assertEqual(lb.BRAND, "Gamma Book Store")
